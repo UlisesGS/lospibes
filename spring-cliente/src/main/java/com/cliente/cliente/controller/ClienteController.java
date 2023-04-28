@@ -51,12 +51,17 @@ public class ClienteController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?>modificar(@PathVariable Long id){
+    public ResponseEntity<?>modificar(@PathVariable Long id, @RequestBody Cliente cliente){
         Optional<Cliente> find= servCliente.findById(id);
         if(find.isPresent()){
-            Cliente cliente=find.get();
-            
+            Cliente nuevoCliente=find.get();
+            nuevoCliente.setNombre(cliente.getNombre());
+            nuevoCliente.setTelefono(cliente.getTelefono());
+            nuevoCliente.setEmail(cliente.getEmail());
+            servCliente.save(nuevoCliente);
+            return ResponseEntity.ok(nuevoCliente);
         }
+        return ResponseEntity.notFound().build();
     }
     
     
