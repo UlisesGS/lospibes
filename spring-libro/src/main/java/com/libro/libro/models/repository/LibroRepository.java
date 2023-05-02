@@ -1,4 +1,4 @@
-package com.libro.libro.repository;
+package com.libro.libro.models.repository;
 
 import com.libro.libro.models.entity.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;

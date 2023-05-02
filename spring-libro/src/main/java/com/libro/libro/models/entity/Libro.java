@@ -1,7 +1,32 @@
 package com.libro.libro.models.entity;
 
-import javax.persistence.Entity;
+import com.libro.libro.client.entity.Autor;
+import lombok.Data;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Data
+@Table(name = "libros")
 public class Libro {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    private String nombre;
+
+    @NotBlank
+    private Integer paginas;
+
+    @Transient
+    private Autor autor;
+
+    @NotNull
+    private Long idAutor;
+
+
 }
