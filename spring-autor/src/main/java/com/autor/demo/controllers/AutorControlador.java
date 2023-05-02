@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 public class AutorControlador {
+    //comentario para ver  en git
     @Autowired
     private AutorService service;
     private ResponseEntity<?>validar(BindingResult result){
@@ -24,7 +25,7 @@ public class AutorControlador {
         });
         return new ResponseEntity<>(errores, HttpStatus.NOT_FOUND);
     }
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<?>listar(){
         return ResponseEntity.ok().body(service.findAll());
     }
