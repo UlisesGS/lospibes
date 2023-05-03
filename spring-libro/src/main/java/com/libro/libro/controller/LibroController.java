@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
+@RestController
 public class LibroController {
 
     @Autowired
@@ -59,13 +59,15 @@ public class LibroController {
                 validate(result);
             }
 
-            Autor autor = validateAutor(libro.getIdAutor());
+       /*   Autor autor = validateAutor(libro.getIdAutor());
 
             if(autor==null){
                 return new ResponseEntity<>("El autor es incorrecto.", HttpStatus.NOT_FOUND);
             }
+            */
 
-            libro.setAutor(autor);
+
+          //  libro.setAutor(autor);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(libroService.save(libro));
         }catch (DataAccessException e){

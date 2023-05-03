@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -19,7 +20,7 @@ public class Libro {
     @NotBlank
     private String nombre;
 
-    @NotBlank
+    @NotNull
     private Integer paginas;
 
     @Transient

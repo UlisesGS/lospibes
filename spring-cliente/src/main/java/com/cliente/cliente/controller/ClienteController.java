@@ -36,7 +36,7 @@ public class ClienteController {
         return ResponseEntity.ok(clientes); 
     }
     
-    @GetMapping("/{}id")
+    @GetMapping("/{id}")
     public ResponseEntity<?>buscarPorId(@PathVariable Long id){
         Cliente cliente= servCliente.findById(id).get();
         if(cliente==null){
