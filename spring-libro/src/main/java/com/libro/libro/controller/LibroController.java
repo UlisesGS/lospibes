@@ -3,6 +3,7 @@ package com.libro.libro.controller;
 import com.libro.libro.client.entity.Autor;
 import com.libro.libro.models.entity.Libro;
 import com.libro.libro.models.service.ImplLibroService;
+import com.libro.libro.models.service.IntLibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class LibroController {
 
     @Autowired
-    private ImplLibroService libroService;
+    private IntLibroService libroService;
 
 
     @GetMapping
@@ -77,7 +78,7 @@ public class LibroController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> change(@Valid @RequestBody Libro libro, @PathVariable Long id, BindingResult result){
+    public ResponseEntity<?> change(@Valid @RequestBody Libro libro, BindingResult result, @PathVariable Long id){
         Optional<Libro>libroOptional = libroService.findByid(id);
         try{
             if (result.hasErrors()){

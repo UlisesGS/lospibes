@@ -1,13 +1,13 @@
 version: "3.7"
 services:
-   msvc-eureka:
-     image: msvc-eureka:latest
+   eureka:
+     image: ulisesgs/eureka
      ports:
        - "8761:8761"
      restart: always
      networks:
        - spring
-   msvc-mysql:
+   servicio_mysql:
       image: mysql:8
       ports:
         - "3307:3306"
@@ -17,36 +17,49 @@ services:
       environment:
         MYSQL_DATABASE: db_biblioteca
         MYSQL_ROOT_PASSWORD: root
-
-   msvc-autor:
-     image: msvc-autor:latest
+   autor_postgresql:
+     image: postgres:latest
+     ports:
+       - "5432:5432"
      restart: always
      networks:
        - spring
-     depends_on:
-       - msvc-eureka
-       - msvc-mysql
-   msvc-libro:
-     image: msvc-libro:latest
+     environment:
+       POSTGRES_DB: msvc_biblioteca
+       POSTGRES_PASSWORD: root
+
+   msvc-autor:
+     image: autor:latest
      restart: always
      ports:
 
-       - "8007:8007"
+       - "8002:8002"
      networks:
        - spring
      depends_on:
-       - msvc-eureka
-       - msvc-mysql
+       - eureka
+       - autor_postgresql
+   msvc-libro:
+     image: libro:latest
+     restart: always
+     ports:
+
+       - "8001:8001"
+     networks:
+       - spring
+     depends_on:
+       - eureka
+       - servicio_mysql
 
    msvc-gateway:
-     image: msvc-gateway:latest
+     image: ulisesgs/gateway:latest
      restart: always
      ports:
        - "8090:8090"
      networks:
        - spring
      depends_on:
-       - msvc-eureka
+       - eureka
        - msvc-autor
        - msvc-libro
 
