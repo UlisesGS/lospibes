@@ -64,7 +64,7 @@ public class EditorialControlador {
         return ResponseEntity.notFound().build();
 
     }
-    @PutMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?>delete(@PathVariable Long id){
         Optional<Editorial>e = service.findById(id);
         if (e.isPresent()){
