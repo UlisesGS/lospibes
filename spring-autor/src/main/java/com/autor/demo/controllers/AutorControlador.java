@@ -21,7 +21,7 @@ public class AutorControlador {
     private ResponseEntity<?>validar(BindingResult result){
         Map<String,Object>errores = new HashMap<>();
         result.getFieldErrors().forEach(e->{
-            errores.put(e.getField(),"el campo"+e.getField()+ ""+ e.getDefaultMessage());
+            errores.put(e.getField(),"El campo "+e.getField()+ " "+ e.getDefaultMessage());
         });
         return new ResponseEntity<>(errores, HttpStatus.NOT_FOUND);
     }
