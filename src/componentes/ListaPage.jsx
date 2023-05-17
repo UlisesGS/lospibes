@@ -3,6 +3,7 @@ import { findAll } from "../servicio/AutorService";
 import Swal from "sweetalert2";
 import { useNavigate} from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { eliminar } from './../servicio/AutorService';
 let autorinicial={
     id:0,
     nombre:"",
@@ -33,8 +34,17 @@ export const ListaPage=()=>{
     useEffect(()=>{
       traerAutores();
     },[])
+    useEffect(()=>{
+        traerAutores();
+      },[autores])
     const abrirFomulario=()=>{
         navegar("/autoresForm");
+
+    }
+    const eliminarA= async(id)=>{
+        await eliminar(id);
+        Swal.fire('Eliminar', `Autor ${id} fue elimado con exito`, 'info')
+        navegar("/autores")
 
     }
     return (<>
@@ -67,7 +77,7 @@ export const ListaPage=()=>{
             
         </td>
         <td>
-            <button className="btn btn-danger btn-sm">Eliminar</button>
+            <button onClick={()=>eliminarA(a.id)} className="btn btn-danger btn-sm">Eliminar</button>
             
         </td>
         </tr>

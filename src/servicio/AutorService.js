@@ -36,3 +36,14 @@ export const save = async(nombre)=>{
     }
 
 }
+export const update = async(nombre,id)=>{
+    try {
+        return await axios.put(`${url}/${id}`,{nombre})
+    } catch (error) {
+        throw error;
+    }
+    
+}
+export const eliminar = async(id)=>{
+    axios.delete(`${url}/${id}`);
+}
