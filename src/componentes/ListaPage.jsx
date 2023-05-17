@@ -1,24 +1,45 @@
 import { useEffect, useState } from "react"
 import { findAll } from "../servicio/AutorService";
 import Swal from "sweetalert2";
-
+import { useNavigate} from "react-router-dom";
+import { NavLink } from "react-router-dom";
+let autorinicial={
+    id:0,
+    nombre:"",
+}
 export const ListaPage=()=>{
-
+    const navegar = useNavigate();
     const[autores,setAutores]= useState([]);
+   // const[autor,setAutor]=useState(autorinicial)
+  let autor={
+
+   }
     const traerAutores = async()=>{
         const respuesta = await findAll();
         console.log(respuesta.data);
         setAutores(respuesta.data)
 
     }
-    const editar= (id) => {
-    Swal.fire('En construccion',`para el ${id} esta en contruccion`,'info')
+    
+    const editar= (a) => {
+       // console.log(a);
+       // setAutor(autorinicial)
+       // setAutor(a);
+       autor=a
+        console.log(autor);
+    //Swal.fire('En construccion',`para el ${a.nombre} esta en contruccion`,'info')
+    navegar('/autoresForm')
     }
     useEffect(()=>{
       traerAutores();
     },[])
+    const abrirFomulario=()=>{
+        navegar("/autoresForm");
+
+    }
     return (<>
     <h5 className="m-4">Lista de Autores</h5>
+    <button onClick={()=>abrirFomulario()} className="btn btn-dark m-4">Crear Autor</button>
  <table className="table table-hover table-striped">
 
 <thead>
@@ -40,7 +61,9 @@ export const ListaPage=()=>{
         <td>{a.id}</td>
         <td>{a.nombre}</td>
         <td>
-            <button onClick={()=>editar(a.id)} className="btn btn-dark btn-sm">Editar</button>
+        <NavLink  className="btn btn-sm btn-outline-secondary" 
+        to={`/autoresForm/editar/${a.id}`}>Editar
+        </NavLink>
             
         </td>
         <td>
