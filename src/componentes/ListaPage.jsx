@@ -34,15 +34,20 @@ export const ListaPage=()=>{
     useEffect(()=>{
       traerAutores();
     },[])
+    /*
     useEffect(()=>{
         traerAutores();
       },[autores])
+      */
     const abrirFomulario=()=>{
         navegar("/autoresForm");
 
     }
     const eliminarA= async(id)=>{
+        setAutores(autores.filter(a=>a.id!=id))
         await eliminar(id);
+     
+    
         Swal.fire('Eliminar', `Autor ${id} fue elimado con exito`, 'info')
         navegar("/autores")
 
